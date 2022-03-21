@@ -20,6 +20,11 @@ export class TasksComponent implements OnInit {
     let task = new Task();  //object from task
     task.title = title;
     this.tasks.push(task);
+    Swal.fire(
+      'Task added successfuly!',
+      '',
+      'success'
+    )
   }
 
   update(task: Task): void {
