@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
 
-  tasks: Task[] = [] //array of tasks
+  tasks: Task[] = [] ; //array of tasks
   firstName:string="Mona";
   
   constructor() { }
@@ -22,7 +22,7 @@ export class TasksComponent implements OnInit {
   }
 
   update(task: Task): void {
-    task.isDone != task.isDone;
+    task.isDone =! task.isDone;
   }
 
   delete(index: number): void {
