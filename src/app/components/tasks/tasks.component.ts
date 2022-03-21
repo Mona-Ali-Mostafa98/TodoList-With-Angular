@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class TasksComponent implements OnInit {
 
   tasks: Task[] = [] //array of tasks
-
+  firstName:string="Mona";
+  
   constructor() { }
   ngOnInit(): void {
   }
@@ -26,6 +27,10 @@ export class TasksComponent implements OnInit {
 
   delete(index: number): void {
     this.tasks.splice(index, 1)
+  }
+
+  getPindingTasksCount():number{
+    return this.tasks.filter(task=>!task.isDone).length;
   }
   
 }
