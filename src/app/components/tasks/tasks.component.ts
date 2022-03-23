@@ -43,7 +43,6 @@ export class TasksComponent implements OnInit {
       (error:any)=>{ alert("error")}
       );
     
-    
     Swal.fire(
       'Task added successfuly!',
       '',
@@ -53,6 +52,13 @@ export class TasksComponent implements OnInit {
 
   update(task: Task): void {
     task.IsDone =! task.IsDone;
+    // part add using api 
+    this._httpClient.put(`https://api.mohamed-sadek.com/task/put`, task)
+    .subscribe(
+      (response:any)=>{
+      },
+      (error:any)=>{alert("error")}
+    )
   }
 
   delete(index: number): void {

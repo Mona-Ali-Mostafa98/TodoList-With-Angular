@@ -18,7 +18,7 @@
              <ul class="list-group mb-0" *ngFor="let task of tasks;let currentIndex = index">
                <li class="list-group-item d-flex justify-content-between align-items-center mb-2 fs-5">
                  <div class="d-flex align-items-center">
-                   <input [value]="task.IsDone" (change)="update(task)" class="form-check-input me-4" type="checkbox"
+                   <input [checked]="task.IsDone" (change)="update(task)" class="form-check-input me-4" type="checkbox"
                      value="" aria-label="..." />
                    <div [class.done-task]="task.IsDone"> {{task.Title}}</div>
                  </div>
