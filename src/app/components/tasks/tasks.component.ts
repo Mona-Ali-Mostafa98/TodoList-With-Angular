@@ -1,6 +1,7 @@
 import { Task } from './../../models/task';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-tasks',
@@ -12,13 +13,27 @@ export class TasksComponent implements OnInit {
   tasks: Task[] = [] ; //array of tasks
   firstName:string="Mona";
   
-  constructor() { }
+  constructor(private _httpClient:HttpClient) { }
+
   ngOnInit(): void {
+    this._httpClient.get(`https://api.mohamed-sadek.com/task/get`)
+    .subscribe(
+      (response:any)=>{
+        console.log(JSON.stringify(response));
+        this.tasks=response.Data;
+      }
+      ,
+      (error:any)=>{
+        alert("error");
+      }
+    );
+    //alert("alert 2");
+
   }
 
-  add(title: string): void {
+  add(Title: string): void {
     let task = new Task();  //object from task
-    task.title = title;
+    task.Title = Title;
     this.tasks.push(task);
     Swal.fire(
       'Task added successfuly!',
@@ -28,7 +43,7 @@ export class TasksComponent implements OnInit {
   }
 
   update(task: Task): void {
-    task.isDone =! task.isDone;
+    task.IsDone =! task.IsDone;
   }
 
   delete(index: number): void {
@@ -54,7 +69,7 @@ export class TasksComponent implements OnInit {
   }
 
   getPindingTasksCount():number{
-    return this.tasks.filter(task=>!task.isDone).length;
+    return this.tasks.filter(task=>!task.IsDone).length;
   }
   
 }

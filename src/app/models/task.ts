@@ -1,4 +1,4 @@
 export class Task{
-    title:string="";
-    isDone:boolean=false;
+    Title:string="";
+    IsDone:boolean=false;
 }
