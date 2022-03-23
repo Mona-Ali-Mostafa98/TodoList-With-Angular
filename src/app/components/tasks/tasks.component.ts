@@ -53,7 +53,7 @@ export class TasksComponent implements OnInit {
   update(task: Task): void {
     task.IsDone =! task.IsDone;
     // part add using api 
-    this._httpClient.put(`https://api.mohamed-sadek.com/task/put`, task)
+    this._httpClient.put(`https://api.mohamed-sadek.com/task/put`, task)  //task object that url need to update
     .subscribe(
       (response:any)=>{
       },
@@ -62,6 +62,7 @@ export class TasksComponent implements OnInit {
   }
 
   delete(index: number): void {
+    let task=this.tasks[index];  //create object from task to get id of task to use in api
     // this.tasks.splice(index, 1)
     Swal.fire({
       title: 'Are you sure?',
@@ -73,7 +74,14 @@ export class TasksComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.tasks.splice(index, 1) //fun. to delete task
+        // 77 - 84 delete task using api 
+        this._httpClient.delete(`https://api.mohamed-sadek.com/Task/Delete?id=${task.ID}`)
+        .subscribe(
+          (response:any)=>{
+            this.tasks.splice(index,1);
+          },
+          (error:any)=>{}
+        );
         Swal.fire(
           'Deleted!',
           'Your Task has been deleted.',
