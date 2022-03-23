@@ -34,7 +34,16 @@ export class TasksComponent implements OnInit {
   add(Title: string): void {
     let task = new Task();  //object from task
     task.Title = Title;
-    this.tasks.push(task);
+    this._httpClient.post(`https://api.mohamed-sadek.com/task/post`, task)
+    .subscribe(
+      (response:any)=>
+      {
+        this.tasks.push(task);
+      },
+      (error:any)=>{ alert("error")}
+      );
+    
+    
     Swal.fire(
       'Task added successfuly!',
       '',
