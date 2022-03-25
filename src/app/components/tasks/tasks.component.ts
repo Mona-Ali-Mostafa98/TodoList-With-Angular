@@ -23,12 +23,9 @@ export class TasksComponent implements OnInit {
         this.tasks=response.Data;
       }
       ,
-      (error:any)=>{
-        alert("error");
+      (error:any)=>{this.erroralert();
       }
     );
-    //alert("alert 2");
-
   }
 
   add(Title: string): void {
@@ -39,15 +36,16 @@ export class TasksComponent implements OnInit {
       (response:any)=>
       {
         this.tasks.push(task);
+        Swal.fire(
+          'Task added successfuly!',
+          '',
+          'success'
+        )
       },
-      (error:any)=>{ alert("error")}
+      (error:any)=>{ this.erroralert()}
       );
     
-    Swal.fire(
-      'Task added successfuly!',
-      '',
-      'success'
-    )
+   
   }
 
   update(task: Task): void {
@@ -57,7 +55,7 @@ export class TasksComponent implements OnInit {
     .subscribe(
       (response:any)=>{
       },
-      (error:any)=>{alert("error")}
+      (error:any)=>{this.erroralert()}
     )
   }
 
@@ -79,20 +77,29 @@ export class TasksComponent implements OnInit {
         .subscribe(
           (response:any)=>{
             this.tasks.splice(index,1);
+            Swal.fire(
+              'Deleted!',
+              'Your Task has been deleted.',
+              'success'
+            )
           },
-          (error:any)=>{}
+          (error:any)=>{this.erroralert()}
         );
-        Swal.fire(
-          'Deleted!',
-          'Your Task has been deleted.',
-          'success'
-        )
       }
     })
   }
 
   getPindingTasksCount():number{
     return this.tasks.filter(task=>!task.IsDone).length;
+  }
+  
+  // sweet alert to show error massage and using in deferant place 
+  erroralert():void{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong, try agian!',
+    })
   }
   
 }

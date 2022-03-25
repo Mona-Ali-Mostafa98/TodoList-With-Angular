@@ -5,7 +5,7 @@
          <div class="card" style="border-radius: 15px;" style="background-color: #d2eff8;">
            <div class="card-body p-5">
              <h6 class="mb-3 text-center fs-2">Todo List</h6>
-             <div class="mb-4 text-center fs-4"> Hello {{firstName}} , Your Pinding Tasks is <span class="text-danger">
+             <div class="mb-4 text-center fs-4"> Hello {{firstName}} , Your Pending Tasks is <span class="text-danger">
                  {{getPindingTasksCount()}} </span></div>
              <div class="d-flex justify-content-center align-items-center mb-4">
                <div class="div-outline flex-fill">
@@ -21,6 +21,7 @@
                    <input [checked]="task.IsDone" (change)="update(task)" class="form-check-input me-4" type="checkbox"
                      value="" aria-label="..." />
                    <div [class.done-task]="task.IsDone"> {{task.Title}}</div>
+                   <!-- <div class="ms-3">{{task.CreatedDate | date:'dd-mm-yyyy | hh:mm:ss'}}</div> -->
                  </div>
 
                  <a href="#!" class="btn btn-danger" data-mdb-toggle="tooltip" Title="Remove item"
